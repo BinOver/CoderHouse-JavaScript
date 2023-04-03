@@ -10,7 +10,7 @@ function validarMusculo (){
 function validarCantidad (){
     let cant = 0;
     do{
-        cant = prompt('Ingrese la cantidad maxima de ejercicios');
+        cant = Math.floor(prompt('Ingrese la cantidad maxima de ejercicios'));
         if (cant < 0 ){
             alert('La cantidad debe ser mayor a 0');
         }
@@ -18,8 +18,7 @@ function validarCantidad (){
     return cant;
 }
 
-
-// Funcion que devuelve un array con los ejecicios para el musculo seleccionado
+// Funcion que devuelve un array con los ejecicios para el musculo seleccionado teniendo en cuenta la cantidad
 function darRutina (ejercicios,musculo,cantidad){
     const rutina = ejercicios.filter(eje => eje.musculo == musculo);
     if (cantidad > rutina.leght){
@@ -112,6 +111,7 @@ const ejercicios = [
     }
 ]
 
+// Ejecucion
 mostrarRutina(darRutina(ejercicios,validarMusculo(),validarCantidad()));
 
 
