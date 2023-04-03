@@ -7,6 +7,7 @@ function validarMusculo (){
     return ejercicio;
 }
 
+//Funcion que valida la cantidad de ejercicios requerida
 function validarCantidad (){
     let cant = 0;
     do{
@@ -28,14 +29,14 @@ function darRutina (ejercicios,musculo,cantidad){
     }
 }
 
-// Funcion que muestra la rutina al usuario
+// Funcion que muestra la rutina al usuario. IMPORTANTE: los resultados se muestran por Console.table 
 function mostrarRutina (rutina){
     for (const rut of rutina) {
         console.table(rut);
     }
 }
 
-// Array de datos
+// Array de Objetos con los datos de los ejecicios
 const ejercicios = [
     {
         musculo:"pecho",
