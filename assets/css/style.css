@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Josefin+Sans&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box; 
+}
+
+.header{
+    background-color: goldenrod;
+    width: 100%;
+}
+
+.titulo {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 30px;
+    width: 100%;
+    padding: 20px;
+}
+
+.body{
+    min-height: 100vh;
+    position: relative; 
+}
+
+.body::after {
+    content: '';
+    display: block;
+    height: 110px; 
+}
+.footer{
+    position: absolute;
+    background-color: goldenrod;
+    width: 100%;
+    bottom: 0; 
+    padding: 10px;
+}
+
+.copyright{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 15px;
+}
+
+.card{
+    width: 18rem;
+}
+
+.cardImg{
+    width:100%;
+}
+
+.btnEnviar{
+    margin-top:5px;
+}
