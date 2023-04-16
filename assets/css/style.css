@@ -24,6 +24,9 @@
 .body{
     min-height: 100vh;
     position: relative; 
+    background-image: url("../images/background.jpg");
+    background-color: rgba(0, 0, 0, 0.4);
+    background-size: cover;
 }
 
 .body::after {
@@ -31,6 +34,22 @@
     display: block;
     height: 110px; 
 }
+
+.musculo{
+    color: antiquewhite;
+}
+
+.rutina{
+    color: antiquewhite;
+}
+.cantidad{
+    color: antiquewhite;
+}
+
+.favoritos{
+    color: antiquewhite;
+}
+
 .footer{
     position: absolute;
     background-color: goldenrod;
@@ -50,8 +69,4 @@
 
 .cardImg{
     width:100%;
-}
-
-.btnEnviar{
-    margin-top:5px;
 }

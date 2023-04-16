@@ -15,7 +15,7 @@
 
     </header>
     <main class="main" id="main">
-        <div id="musculo">
+        <div class="musculo">
             <h5>Musculo:</h5>
             <input type="radio" name="musculo" value="pecho">
             <span>Pecho </span>
@@ -26,14 +26,17 @@
             <input type="radio" name="musculo" value="piernas">
             <span>Piernas</span>
         </div>
-        <div id="cantidad">
+        <div class="cantidad mt-3 mb-3">
             <h5>Cantidad:</h5>
             <input type="number" name="cantidad" id="cant" min="0">
         </div>
     
-        <button id="btnEnviar" type="button" onclick="pedirRutina()">Enviar</button>
+        <button class="btn btn-light mt-3 mb-3" id="btnEnviar" type="button">Enviar</button>
         <div class="container">
-            <div class ="row" id="tarjetas"></div>
+            <div class="rutina">Rutina:</div>
+            <div class="row" id="tarjetas"></div>
+            <div class="favoritos">Favoritos:</div>
+            <div class="row" id="favoritos"></div>
         </div>
 
     </main>
