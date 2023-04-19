@@ -24,7 +24,7 @@ function mostrarRutina (rutina){
     let tarjeta = document.getElementById('tarjetas');
     tarjeta.innerHTML = '';
     mostrarFavoritos();
-    //Muestra cards
+    //Muestra cards en DOM
     for (const rut of rutina) {
         console.table(rut);
         tarjeta.innerHTML += `
@@ -45,8 +45,6 @@ function mostrarRutina (rutina){
     rutina.forEach(rut => {
         document.getElementById(`cardbtn${rut.id}`).addEventListener('click',() => agregarAFavoritos(rut));
     });
-    //Actualizar favoritos
-    
 }
 
 //Funcion que agrega ejercicios a favoritos
