@@ -83,24 +83,26 @@ function mostrarFavoritos(){
     }
     console.table(f);
     //Muestra cards de los objetos en local storage
-    for(const card of f){
-        tarjeta.innerHTML += `
-        <div class="col-3 card m-2 p-0">
+    if (f.length > 0) {
+        for (const card of f) {
+            tarjeta.innerHTML += `
+            <div class="col-3 card m-2 p-0">
             <img class="card-img-top" src="${card.image}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">${(card.musculo).toUpperCase()}</h5>
+                <h5 class="card-title">${card.musculo.toUpperCase()}</h5>
                 <p class="card-text">Ejercicio: ${card.ejercicio}</p>
                 <p class="card-text">Repeticiones: ${card.repeticiones}</p>
                 <p class="card-text">Series: ${card.series}</p>
                 <button id="cardfavbtn${card.id}" class="btn btn-warning">Borrar</button>
             </div>
         </div>
-        `         
+        `;
+        }
+        //Captura ejentos de botones
+        f.forEach((card) => {
+        document.getElementById(`cardfavbtn${card.id}`).addEventListener("click", () => borrarDeFavoritos(card.id));
+        });
     }
-    //Captura ejentos de botones
-    f.forEach(card => {
-        document.getElementById(`cardfavbtn${card.id}`).addEventListener('click',() => borrarDeFavoritos(card.id));
-    });
 };
 
 // Funcion que devuelve en el DOM las tarjetas de las rutinas especificas
