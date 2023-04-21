@@ -89,7 +89,7 @@ function mostrarFavoritos(){
             <div class="col-3 card m-2 p-0">
             <img class="card-img-top" src="${card.image}" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">${card.musculo.toUpperCase()}</h5>
+                <h5 class="card-title">${(card.musculo).toUpperCase()}</h5>
                 <p class="card-text">Ejercicio: ${card.ejercicio}</p>
                 <p class="card-text">Repeticiones: ${card.repeticiones}</p>
                 <p class="card-text">Series: ${card.series}</p>
