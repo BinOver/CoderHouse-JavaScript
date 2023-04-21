@@ -6,7 +6,7 @@ const ejercicios = [
         ejercicio:"Banco Plano c/barra",
         repeticiones:10,
         series:3,
-        image:"../assets/images/pecho.webp"
+        image:"./assets/images/pecho.webp"
     },
     {
         id:2,
@@ -14,7 +14,7 @@ const ejercicios = [
         ejercicio:"Banco inclinado c/mancuerna",
         repeticiones:15,
         series:4,
-        image:"../assets/images/pecho.webp"
+        image:"./assets/images/pecho.webp"
     },
     {
         id:3,
@@ -22,7 +22,7 @@ const ejercicios = [
         ejercicio:"Polea",
         repeticiones:10,
         series:4,
-        image:"../assets/images/pecho.webp"
+        image:"./assets/images/pecho.webp"
     },
     {
         id:4,
@@ -30,7 +30,7 @@ const ejercicios = [
         ejercicio:"Remo c/polea",
         repeticiones:15,
         series:4,
-        image:"../assets/images/espalda.jpeg"
+        image:"./assets/images/espalda.jpeg"
     },
     {
         id:5,
@@ -38,7 +38,7 @@ const ejercicios = [
         ejercicio:"Biceps Martilo",
         repeticiones:10,
         series:3,
-        image:"../assets/images/espalda.jpeg"
+        image:"./assets/images/espalda.jpeg"
     },
     {
         id:6,
@@ -46,7 +46,7 @@ const ejercicios = [
         ejercicio:"Serrucho c/mancuerna",
         repeticiones:12,
         series:4,
-        image:"../assets/images/espalda.jpeg"
+        image:"./assets/images/espalda.jpeg"
     },
     {
         id:7,
@@ -54,7 +54,7 @@ const ejercicios = [
         ejercicio:"Biceps W",
         repeticiones:10,
         series:3,
-        image:"../assets/images/brazos.webp"
+        image:"./assets/images/brazos.webp"
     },
     {
         id:8,
@@ -62,7 +62,7 @@ const ejercicios = [
         ejercicio:"Biceps Martillo",
         repeticiones:10,
         series:3,
-        image:"../assets/images/brazos.webp"
+        image:"./assets/images/brazos.webp"
     },
     {
         id:9,
@@ -70,7 +70,7 @@ const ejercicios = [
         ejercicio:"Pull Over",
         repeticiones:12,
         series:4,
-        image:"../assets/images/brazos.webp"
+        image:"./assets/images/brazos.webp"
     },
     {
         id:10,
@@ -78,7 +78,7 @@ const ejercicios = [
         ejercicio:"Sentadilla",
         repeticiones:10,
         series:3,
-        image:"../assets/images/piernas.jpg"
+        image:"./assets/images/piernas.jpg"
     },
     {
         id:11,
@@ -86,7 +86,7 @@ const ejercicios = [
         ejercicio:"Prensa",
         repeticiones:12,
         series:4,
-        image:"../assets/images/piernas.jpg"
+        image:"./assets/images/piernas.jpg"
     },
     {
         id:12,
@@ -94,6 +94,6 @@ const ejercicios = [
         ejercicio:"Calf",
         repeticiones:15,
         series:4,
-        image:"../assets/images/piernas.jpg"
+        image:"./assets/images/piernas.jpg"
     }
 ]
