@@ -1,4 +1,5 @@
-// Array de Objetos con los datos de los ejecicios
+// Array muestra con los datos en formato de Objetos
+// NO se utiliza en la ejecucion del programa.
 const ejercicios = [
     {
         id:1,

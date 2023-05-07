@@ -38,7 +38,7 @@ function darRutina (ejercicios,musculo,cantidad){
     }
 }
 
-// Funcion que muestra la rutina al usuario.
+// Funcion que muestra la rutina al usuario en tarjetas incertadas en el DOM.
 function mostrarRutina (rutina){
     let tarjeta = document.getElementById('tarjetas');
     tarjeta.innerHTML = '';
