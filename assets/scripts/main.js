@@ -145,6 +145,8 @@ function mostrarError(){
 // Funcion que trae la base los datos de db.json como Promesa.
 async function traerDB(){
     let respuesta = await fetch("/assets/data/db.json")
+    // !! Se utiliza la direccion del recurso en versel para solventar un problema con CORS ingresar al sitio desde una carpeta local
+    // let respuesta = await fetch("https://coder-house-java-script-five.vercel.app/assets/data/db.json")
     let data = await respuesta.json()
     return data.ejercicios
 }
@@ -156,7 +158,8 @@ function pedirRutina(){
         .then(db =>mostrarRutina(
             darRutina(db,obtenerMusculo(),validarCantidad())
             )
-        );
+        )
+        .catch((err) => console.log(err));
 };
 
 
