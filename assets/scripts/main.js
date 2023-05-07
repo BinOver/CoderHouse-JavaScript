@@ -2,7 +2,6 @@
 function validarCantidad (){
     let c = document.getElementById('cant');
     let cant = parseInt(c.value);
-    console.log(cant);
     //Validacion de cantidad
     if (cant <= 0 || isNaN(cant)){
         mostrarError();
@@ -14,14 +13,19 @@ function validarCantidad (){
 // Funcion que devuelve un array con los ejecicios para el musculo seleccionado teniendo en cuenta la cantidad.
 function darRutina (ejercicios,musculo,cantidad){
     const rutina = ejercicios.filter(eje => eje.musculo == musculo);
+    //Si la cantida ingresada es mayor a la cantidad de ejercicios disponible se envian todos.
     if (cantidad > rutina.length){
-        //Mensaje Toastify que muestra la cantidad de ejercicios incertados de superer los disponibles.
+        //Mensaje Toastify que muestra la cantidad de ejercicios disponibles.
         Toastify({
             text:"Solo se cuenta con "+ rutina.length + " ejercicios de " + musculo + ".",
             duration:3000
         }).showToast();
-        //Devuelve el total de ejercicios disponibles
+        //Devuelve el total de ejercicios disponibles.
         return rutina
+    //Si se ingresa una cantidad negativa, 0 o no se elige musculo se devuelve vacio.
+    }else if(cantidad<=0 || musculo==undefined){
+        return [];
+    //Si se ingresa una cantidad menor a los ejercicios disponibles se devuelve la cantidad enviada.
     }else{
         //Mensaje Toastify que muestra la cantidad de ejercicios incertados.
         Toastify({
@@ -34,14 +38,13 @@ function darRutina (ejercicios,musculo,cantidad){
     }
 }
 
-// Funcion que muestra la rutina al usuario. IMPORTANTE: los resultados se muestran por Console.table.
+// Funcion que muestra la rutina al usuario.
 function mostrarRutina (rutina){
     let tarjeta = document.getElementById('tarjetas');
     tarjeta.innerHTML = '';
     mostrarFavoritos();
     //Muestra cards en DOM
     for (const rut of rutina) {
-        console.table(rut);
         tarjeta.innerHTML += `
         <div class="col-3 card m-2 p-0">
             <img class="card-img-top" src="${rut.image}" alt="Card image cap">
@@ -63,7 +66,6 @@ function mostrarRutina (rutina){
 
 //Funcion que agrega ejercicios a favoritos.
 function agregarAFavoritos(rut) {
-    console.table(rut);
     localStorage.setItem(rut.id,JSON.stringify(rut));
     mostrarFavoritos();
 }
@@ -92,7 +94,6 @@ function obtenerMusculo(){
     //Validacion de seleccion de musculo.
     for (const m of musc){
         if(m.checked){
-            console.log(m.value);
             return m.value;
         }
     }
@@ -109,7 +110,6 @@ function mostrarFavoritos(){
     for (let [, value] of Object.entries(localStorage)) {
         f.push(JSON.parse(value));
     }
-    console.table(f);
     //Muestra cards de los objetos en local storage.
     if (f.length > 0) {
         for (const card of f) {
