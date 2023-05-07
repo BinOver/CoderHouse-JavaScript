@@ -1,4 +1,4 @@
-//Funcion que valida la cantidad de ejercicios requerida
+//Funcion que valida la cantidad de ejercicios requerida.
 function validarCantidad (){
     let c = document.getElementById('cant');
     let cant = parseInt(c.value);
@@ -11,17 +11,30 @@ function validarCantidad (){
     return cant;
 }
 
-// Funcion que devuelve un array con los ejecicios para el musculo seleccionado teniendo en cuenta la cantidad
+// Funcion que devuelve un array con los ejecicios para el musculo seleccionado teniendo en cuenta la cantidad.
 function darRutina (ejercicios,musculo,cantidad){
     const rutina = ejercicios.filter(eje => eje.musculo == musculo);
     if (cantidad > rutina.length){
+        //Mensaje Toastify que muestra la cantidad de ejercicios incertados de superer los disponibles.
+        Toastify({
+            text:"Solo se cuenta con "+ rutina.length + " ejercicios de " + musculo + ".",
+            duration:3000
+        }).showToast();
+        //Devuelve el total de ejercicios disponibles
         return rutina
     }else{
+        //Mensaje Toastify que muestra la cantidad de ejercicios incertados.
+        Toastify({
+            text:"Se agregaron "+ cantidad + " ejercicios de " + musculo + ".",
+            duration:3000
+        }).showToast();
+        //Devuelve la cantidad de ejercicios solicitados.
         return rutina.slice(0,cantidad);
+
     }
 }
 
-// Funcion que muestra la rutina al usuario. IMPORTANTE: los resultados se muestran por Console.table 
+// Funcion que muestra la rutina al usuario. IMPORTANTE: los resultados se muestran por Console.table.
 function mostrarRutina (rutina){
     let tarjeta = document.getElementById('tarjetas');
     tarjeta.innerHTML = '';
@@ -42,50 +55,62 @@ function mostrarRutina (rutina){
         </div>
         `
     }
-    //Capturar evento de botones
+    //Capturar evento de botones.
     rutina.forEach(rut => {
         document.getElementById(`cardbtn${rut.id}`).addEventListener('click',() => agregarAFavoritos(rut));
     });
 }
 
-//Funcion que agrega ejercicios a favoritos
+//Funcion que agrega ejercicios a favoritos.
 function agregarAFavoritos(rut) {
     console.table(rut);
     localStorage.setItem(rut.id,JSON.stringify(rut));
     mostrarFavoritos();
-
 }
 
-//Borrar Favorito de Local Storage
+//Borrar Favorito de Local Storage.
 function borrarDeFavoritos(fkey){
     localStorage.removeItem(fkey);
     mostrarFavoritos();
 }
 
-//Funcion que trae el valor del Radio 
+//Funcion que serve de cierre manual limpiando tanto el DOM como la local Storage.
+function limpiarDOM(){
+    //Limpia local storage.
+    localStorage.clear();
+    //Limpia tarjetas de rutina.
+    let domFavoritos = document.getElementById('favoritos');
+    domFavoritos.innerHTML = ``;
+    //Limpia tarjetas en Favoritos.
+    let domEjercicios = document.getElementById('tarjetas');
+    domEjercicios.innerHTML = ``;
+}
+
+//Funcion que trae el valor del Radio.
 function obtenerMusculo(){
     let musc = document.getElementsByName('musculo');
-    //Validacion de seleccion de musculo
+    //Validacion de seleccion de musculo.
     for (const m of musc){
         if(m.checked){
             console.log(m.value);
             return m.value;
         }
     }
+    //Ejecuta la funcion para que se muestra un banner de error.
     mostrarError();
 }
 
-//Funcion mostrar favoritos
+//Funcion mostrar favoritos.
 function mostrarFavoritos(){
     let tarjeta = document.getElementById('favoritos');
     tarjeta.innerHTML = '';
     let f=[];
-    //Crea Array con los objetos de Local Storage
+    //Crea Array con los objetos de Local Storage.
     for (let [, value] of Object.entries(localStorage)) {
         f.push(JSON.parse(value));
     }
     console.table(f);
-    //Muestra cards de los objetos en local storage
+    //Muestra cards de los objetos en local storage.
     if (f.length > 0) {
         for (const card of f) {
             tarjeta.innerHTML += `
@@ -101,47 +126,50 @@ function mostrarFavoritos(){
             </div>
             `;
         }
-        //Captura ejentos de botones
+        //Captura ejentos de botones.
         f.forEach((card) => {
         document.getElementById(`cardfavbtn${card.id}`).addEventListener("click", () => borrarDeFavoritos(card.id));
         });
     }
 };
 
+// Muestra en pantalla un banner de error con SweetAlert2.
 function mostrarError(){
     Swal.fire({
         icon: 'error',
         title: 'Error en ingreso de datos!',
         text: 'Por favor seleccione un musculo e ingrese una cantidad mayor a 0 de ejercicios'
     });
-
 }
 
-// Funcion que trae la base los datos de db.json
+// Funcion que trae la base los datos de db.json como Promesa.
 async function traerDB(){
     let respuesta = await fetch("/assets/data/db.json")
     let data = await respuesta.json()
     return data.ejercicios
 }
 
-// Funcion que devuelve en el DOM las tarjetas de las rutinas especificas
+// Funcion que devuelve en el DOM las tarjetas de las rutinas especificas. 
+// "traerDB()" devuelve como "Object Promeses" la informacion de ejercicios, luego con .then se utilizar el resultado como parametro en darRutina().
 function pedirRutina(){
     traerDB()
-        .then( db =>mostrarRutina(
+        .then(db =>mostrarRutina(
             darRutina(db,obtenerMusculo(),validarCantidad())
             )
         );
 };
 
 
-// Ejecucion
-// Trae las tarjetas de rutinas segun el ejercicio y cantidades enviadas al presionar el boton Enviar
-let button = document.getElementById("btnEnviar");
-button.addEventListener('click',pedirRutina);
+////// Ejecucion
+// Trae las tarjetas de rutinas segun el ejercicio y cantidades enviadas al presionar el boton Enviar.
+let buttonEnviar = document.getElementById("btnEnviar");
+buttonEnviar.addEventListener('click',pedirRutina);
 
+//Limpia el DOM y el local storage, sirve como cierre manual.
+let buttonLimpiar = document.getElementById("btnLimpiar");
+buttonLimpiar.addEventListener('click',limpiarDOM);
 
-//let cardbutton = document.getElementById("cardbtn");
-
+// Muestra las tarjetas enviadas a Favoritos.
 mostrarFavoritos();
 
 
