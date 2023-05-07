@@ -2,8 +2,10 @@
 function validarCantidad (){
     let c = document.getElementById('cant');
     let cant = parseInt(c.value);
-    if (cant <= 0 ){
-        alert('La cantidad debe ser mayor a 0');
+    console.log(cant);
+    //Validacion de cantidad
+    if (cant <= 0 || isNaN(cant)){
+        mostrarError();
         return 0;
     }
     return cant;
@@ -40,7 +42,6 @@ function mostrarRutina (rutina){
         </div>
         `
     }
-
     //Capturar evento de botones
     rutina.forEach(rut => {
         document.getElementById(`cardbtn${rut.id}`).addEventListener('click',() => agregarAFavoritos(rut));
@@ -64,12 +65,14 @@ function borrarDeFavoritos(fkey){
 //Funcion que trae el valor del Radio 
 function obtenerMusculo(){
     let musc = document.getElementsByName('musculo');
+    //Validacion de seleccion de musculo
     for (const m of musc){
         if(m.checked){
             console.log(m.value);
             return m.value;
         }
     }
+    mostrarError();
 }
 
 //Funcion mostrar favoritos
@@ -87,16 +90,16 @@ function mostrarFavoritos(){
         for (const card of f) {
             tarjeta.innerHTML += `
             <div class="col-3 card m-2 p-0">
-            <img class="card-img-top" src="${card.image}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">${(card.musculo).toUpperCase()}</h5>
-                <p class="card-text">Ejercicio: ${card.ejercicio}</p>
-                <p class="card-text">Repeticiones: ${card.repeticiones}</p>
-                <p class="card-text">Series: ${card.series}</p>
-                <button id="cardfavbtn${card.id}" class="btn btn-warning">Borrar</button>
+                <img class="card-img-top" src="${card.image}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">${(card.musculo).toUpperCase()}</h5>
+                    <p class="card-text">Ejercicio: ${card.ejercicio}</p>
+                    <p class="card-text">Repeticiones: ${card.repeticiones}</p>
+                    <p class="card-text">Series: ${card.series}</p>
+                    <button id="cardfavbtn${card.id}" class="btn btn-warning">Borrar</button>
+                </div>
             </div>
-        </div>
-        `;
+            `;
         }
         //Captura ejentos de botones
         f.forEach((card) => {
@@ -105,19 +108,41 @@ function mostrarFavoritos(){
     }
 };
 
+function mostrarError(){
+    Swal.fire({
+        icon: 'error',
+        title: 'Error en ingreso de datos!',
+        text: 'Por favor seleccione un musculo e ingrese una cantidad mayor a 0 de ejercicios'
+    });
+
+}
+
+// Funcion que trae la base los datos de db.json
+async function traerDB(){
+    let respuesta = await fetch("/assets/data/db.json")
+    let data = await respuesta.json()
+    return data.ejercicios
+}
+
 // Funcion que devuelve en el DOM las tarjetas de las rutinas especificas
 function pedirRutina(){
-    mostrarRutina(darRutina(ejercicios,obtenerMusculo(),validarCantidad()))
+    traerDB()
+        .then( db =>mostrarRutina(
+            darRutina(db,obtenerMusculo(),validarCantidad())
+            )
+        );
 };
 
+
 // Ejecucion
+// Trae las tarjetas de rutinas segun el ejercicio y cantidades enviadas al presionar el boton Enviar
 let button = document.getElementById("btnEnviar");
 button.addEventListener('click',pedirRutina);
 
-let cardbutton = document.getElementById("cardbtn");
+
+//let cardbutton = document.getElementById("cardbtn");
 
 mostrarFavoritos();
-
 
 
 

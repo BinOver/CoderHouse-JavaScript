@@ -1,5 +1,5 @@
 // Array de Objetos con los datos de los ejecicios
-const ejercicios = [
+const ejercicios2 = [
     {
         id:1,
         musculo:"pecho",
